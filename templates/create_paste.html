@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load highlight %}
+
+{% block title %}
+Create Paste
+{% endblock title %}
+
+
+{% block content %}
+<div class="my-10">
+    <div class="my-12">
+        <h1
+            class="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 border-none">
+            Create a Paste</h1>
+    </div>
+    <div class="p-6 bg-base-200 rounded-md w-full my-5">
+        <div>
+            {% if form.non_field_errors %}
+            <div role="alert" class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{{ form.non_field_errors }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if edit %}
+        <form action="{% url 'edit_paste' paste.token %}" method="post">
+            {% else %}
+            <form action="{% url 'create_paste' %}" method="post">
+                {% endif %}
+                {% csrf_token %}
+                <label class="form-control w-full max-w-xs">
+                    <div class="label">
+                        <span class="label-text">{{form.author.label }}</span>
+                    </div>
+                    {{form.author}}
+                    <ul class="mx-8">
+                        {% for error in form.author.errors %}
+                        <li class="label-text-alt text-error list-disc">{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                </label>
+                <label>
+                    <div class="label">
+                        <span class="label-text">{{form.text.label}}</span>
+                    </div>
+                    {{form.text}}
+                    <ul class="mx-8">
+                        {% for error in form.text.errors %}
+                        <li class="label-text-alt text-error list-disc">{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                </label>
+                <!-- temp text to remove -->
+                <textarea placeholder="Bio"
+                    class="hidden textarea textarea-bordered textarea-sm w-full max-w-xs"></textarea>
+                <!-- SELECT -->
+                <style>
+                    .selectize-control.single .selectize-input.input-active,
+                    .selectize-input {
+                        background-color: transparent !important;
+                    }
+
+                    .selectize-dropdown {
+                        background: #eae4cb;
+                    }
+
+                    .selectize-control.single .selectize-input {
+                        background-image: none;
+                        background-color: transparent !important;
+                    }
+                </style>
+                <label class="form-control w-full max-w-xs">
+                    <div class="label">
+                        <span class="label-text">{{form.language.label}}</span>
+                    </div>
+                    {{form.language}}
+                    <ul class="mx-8">
+                        {% for error in form.language.errors %}
+                        <li class="label-text-alt text-error list-disc">{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                </label>
+                <!-- temp select to be remove -->
+                <select class="hidden select select-bordered"></select>
+                <div class="form-control max-w-xs">
+                    <label class="label cursor-pointer">
+                        <span class="label-text">{{form.private.label}}</span>
+                        {{form.private}}
+                    </label>
+                    <ul class="mx-8">
+                        {% for error in form.private.errors %}
+                        <li class="label-text-alt text-error list-disc">{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="form-control max-w-xs">
+                    <label class="label cursor-pointer">
+                        <span class="label-text">{{form.editable.label}}</span>
+                        {{form.editable}}
+                    </label>
+                    <ul class="mx-8">
+
+                        {% for error in form.editable.errors %}
+                        <li class="label-text-alt text-error list-disc">{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <button class="btn btn-active my-10 ml-2 mr-1" type="submit">Save</button>
+                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-active my-10" type="submit">Back</a>
+            </form>
+    </div>
+</div>
+{% endblock content %}

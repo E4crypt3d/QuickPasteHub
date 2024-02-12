@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	.highlight > pre {
+		@apply break-words whitespace-pre-wrap;
+	}
+
+	.highlight {
+		@apply !bg-transparent;
+	}
+
+	.highlight span {
+		@apply !bg-transparent;
+	}
+}
