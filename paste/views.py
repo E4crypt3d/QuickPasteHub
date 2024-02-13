@@ -9,7 +9,6 @@ def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
-            print('valid')
             search_token = form.cleaned_data['search']
             return redirect('view_paste', token=search_token)
     else:
