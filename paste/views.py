@@ -1,20 +1,28 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound
 from .models import Snippet
-from .forms import SnippetForm
+from .forms import SnippetForm, SearchForm
 # Create your views here.
 
 
 def index(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            print('valid')
+            search_token = form.cleaned_data['search']
+            return redirect('view_paste', token=search_token)
+    else:
+        form = SearchForm()
     pastes = Snippet.public.all().order_by('-created_at')[:6]
-    context = {'pastes': pastes}
+    context = {'pastes': pastes, 'form': form}
     return render(request, 'index.html', context)
 
 
 def view_paste(request, token):
-    if token:
+    if token and len(token) == 15:
         try:
-            paste = Snippet.objects.get(token=token)
+            paste = Snippet.objects.get(token__icontains=token)
             context = {'paste': paste}
         except Snippet.DoesNotExist:
             context = {'error': 'error occured'}
@@ -27,9 +35,6 @@ def create_paste(request):
         if form.is_valid():
             form.save()
             return redirect('view_paste', form.instance.token)
-        else:
-            context = {'form': form}
-            return render(request, 'create_paste.html', context)
     else:
         form = SnippetForm()
     previous_url = request.META.get('HTTP_REFERER')

@@ -1,8 +1,8 @@
-from django.forms import ModelForm, forms
+from django import forms
 from .models import Snippet
 
 
-class SnippetForm(ModelForm):
+class SnippetForm(forms.ModelForm):
     class Meta:
         model = Snippet
         fields = ['author', 'text', 'private', 'editable', 'language']
@@ -16,3 +16,17 @@ class SnippetForm(ModelForm):
         # self.fields['language'].widget.attrs['class'] = 'select select-bordered w-full max-w-xs'
         self.fields['private'].widget.attrs['class'] = 'checkbox'
         self.fields['editable'].widget.attrs['class'] = 'checkbox'
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=15, required=True, widget=forms.TextInput(attrs={
+                             'class': 'input input-bordered w-full max-w-xs join-item', 'Placeholder': 'search your token'}))
+
+    def clean_search(self):
+        search_token = self.cleaned_data['search']
+        try:
+            Snippet.objects.get(token__icontains=search_token)
+        except Snippet.DoesNotExist:
+            raise forms.ValidationError(
+                "Paste with this token does not exist.")
+        return search_token
