@@ -85,7 +85,7 @@ Home
                         </div>
                     </div>
                     <div class="text-wrap">
-                        {{ paste.text|highlight:paste.language|safe }}
+                        {{ paste.text|highlight:paste.language|truncatewords_html:50|safe }}
                     </div>
                     <div class="card-actions justify-end mt-auto my-2">
 
