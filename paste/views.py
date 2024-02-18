@@ -9,8 +9,8 @@ from django.views.generic import ListView
 
 
 def index(request):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
+    if request.GET.get('search', False):
+        form = SearchForm(request.GET)
         if form.is_valid():
             search_token = form.cleaned_data['search']
             return redirect('view_paste', token=search_token)

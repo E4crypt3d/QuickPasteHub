@@ -24,6 +24,8 @@ class SearchForm(forms.Form):
 
     def clean_search(self):
         search_token = self.cleaned_data['search']
+        if len(search_token) < 15:
+            raise forms.ValidationError("Invalid token")
         try:
             Snippet.objects.get(token__icontains=search_token)
         except Snippet.DoesNotExist:
