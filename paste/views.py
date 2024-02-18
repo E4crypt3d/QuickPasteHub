@@ -1,7 +1,10 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound
 from .models import Snippet
 from .forms import SnippetForm, SearchForm
+from django.views.generic import ListView
 # Create your views here.
 
 
@@ -55,3 +58,13 @@ def edit_paste(request, token):
         form = SnippetForm(instance=paste)
     context = {'form': form, 'edit': True, 'paste': paste}
     return render(request, 'create_paste.html', context)
+
+
+class ExplorePastes(ListView):
+    model = Snippet
+    template_name = 'explore_pastes.html'
+    context_object_name = 'pastes'
+    paginate_by = 4
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return super().get_queryset().filter(private=False)

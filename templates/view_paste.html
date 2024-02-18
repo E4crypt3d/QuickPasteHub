@@ -27,7 +27,11 @@ View Paste
                 <div class="flex flex-row gap-1">
                     <div class="bg-[var(--fallback-bc,oklch(var(--bc)/0.2))] text-xs px-1 rounded-lg">
                         <span>
+                            {% if paste.private %}
+                            Private
+                            {% else %}
                             Public
+                            {% endif %}
                         </span>
                     </div>
                     {% if paste.editable %}
@@ -112,19 +116,6 @@ View Paste
 
 </div>
 <script>
-    const copyHtml = (id) => {
-        var html = `{{paste.text|highlight:paste.language|safe}}`
-        navigator.clipboard.writeText(html).then(() => {
-            let copyText = document.getElementById(`copyhtml${id}`);
-            copyText.setAttribute('data-tip', 'html copied');
-            setTimeout(() => {
-                copyText.setAttribute('data-tip', 'copy html')
-            }, 3000
-            );
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
     const shareWA = (text) => {
         var message = `QuickPasteHub Paste:\n\nURL: https://www.example.com/${text}\nToken: ${text}`
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html data-theme="retro">
+<html>
 
 <head>
     <title>
@@ -43,6 +43,7 @@
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-300 rounded-box w-52">
                     <li class="font-semibold"><a href="{% url 'create_paste' %}">Create</a></li>
+                    <li class="font-semibold"><a href="{% url 'explore' %}">Public Pastes</a></li>
                 </ul>
             </div>
             <a href="{% url 'home' %}"
@@ -51,6 +52,7 @@
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
                 <li class="font-semibold"><a href="{% url 'create_paste' %}">Create</a></li>
+                <li class="font-semibold"><a href="{% url 'explore' %}">Public Pastes</a></li>
             </ul>
         </div>
         <div class="navbar-end">
@@ -81,7 +83,7 @@
         <aside>
             {% now "Y" as year %}
             <p>Copyright © {{year}} - All right reserved by QuickPasteHub</p>
-            <p class="footer-title">Made with love <span class="opacity-100">&#10084;</span> by <a target="_blank"
+            <p class="footer-title">Made with <span class="opacity-100">&#10084;</span> by <a target="_blank"
                     href="https://github.com/e4crypt3d">E4CRYPT3D</a></p>
         </aside>
     </footer>
