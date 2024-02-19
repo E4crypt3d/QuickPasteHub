@@ -9,7 +9,6 @@ Create Paste
 {% block content %}
 
 
-
 <div class="my-10">
     <div class="my-12">
         <h1
@@ -109,8 +108,11 @@ Create Paste
                         {% endfor %}
                     </ul>
                 </div>
-                <button class="btn btn-active my-10 ml-2 mr-1" type="submit">Save</button>
-                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-active my-10" type="submit">Back</a>
+                <div class="join">
+                    <button class="btn join-item btn-active my-10 ml-1 mr-1" type="submit">Save</button>
+                    <a href="{{ request.META.HTTP_REFERER }}" class="btn join-item btn-active my-10"
+                        type="submit">Back</a>
+                </div>
             </form>
     </div>
 </div>

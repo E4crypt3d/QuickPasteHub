@@ -20,7 +20,8 @@ class SnippetForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=15, required=True, widget=forms.TextInput(attrs={
-                             'class': 'input input-bordered w-full max-w-xs join-item', 'Placeholder': 'search your token'}))
+                             'class': 'input input-bordered w-full max-w-xs join-item',
+                             'Placeholder': 'search eg. a14477ce-8t7b-4', 'pattern': '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4'}))
 
     def clean_search(self):
         search_token = self.cleaned_data['search']

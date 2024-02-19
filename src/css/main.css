@@ -923,6 +923,12 @@ html {
   pointer-events: none;
 }
 
+.btn-square {
+  height: 3rem;
+  width: 3rem;
+  padding: 0px;
+}
+
 :where(.btn:is(input[type="checkbox"])),
 :where(.btn:is(input[type="radio"])) {
   width: auto;
@@ -2654,6 +2660,14 @@ html {
   }
 }
 
+.badge-xs {
+  height: 0.75rem;
+  font-size: 0.75rem;
+  line-height: .75rem;
+  padding-left: 0.313rem;
+  padding-right: 0.313rem;
+}
+
 .badge-sm {
   height: 1rem;
   font-size: 0.75rem;
@@ -2670,9 +2684,27 @@ html {
   font-size: 0.875rem;
 }
 
+.btn-square:where(.btn-xs) {
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0px;
+}
+
 .btn-square:where(.btn-sm) {
   height: 2rem;
   width: 2rem;
+  padding: 0px;
+}
+
+.btn-square:where(.btn-md) {
+  height: 3rem;
+  width: 3rem;
+  padding: 0px;
+}
+
+.btn-square:where(.btn-lg) {
+  height: 4rem;
+  width: 4rem;
   padding: 0px;
 }
 
@@ -3012,6 +3044,16 @@ html {
   margin-bottom: 2rem;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -3046,6 +3088,18 @@ html {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
 }
 
 .block {
@@ -3108,6 +3162,10 @@ html {
   width: 100%;
 }
 
+.w-7 {
+  width: 1.75rem;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -3162,6 +3220,10 @@ html {
   flex-direction: column;
 }
 
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
 .items-center {
   align-items: center;
 }
@@ -3190,12 +3252,20 @@ html {
   gap: 1rem;
 }
 
+.gap-0 {
+  gap: 0px;
+}
+
 .self-center {
   align-self: center;
 }
 
 .text-wrap {
   text-wrap: wrap;
+}
+
+.rounded-badge {
+  border-radius: var(--rounded-badge, 1.9rem);
 }
 
 .rounded-box {
@@ -3212,10 +3282,6 @@ html {
 
 .rounded-xl {
   border-radius: 0.75rem;
-}
-
-.rounded-badge {
-  border-radius: var(--rounded-badge, 1.9rem);
 }
 
 .rounded-r-full {
@@ -3434,6 +3500,16 @@ html {
   background-color: transparent !important;
 }
 
+@media (min-width: 768px) {
+  .md\:badge-sm {
+    height: 1rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding-left: 0.438rem;
+    padding-right: 0.438rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .lg\:stats-horizontal {
     grid-auto-flow: column;
@@ -3462,6 +3538,10 @@ html {
 }
 
 @media (min-width: 768px) {
+  .md\:gap-1 {
+    gap: 0.25rem;
+  }
+
   .md\:gap-4 {
     gap: 1rem;
   }

@@ -64,7 +64,8 @@ class ExplorePastes(ListView):
     model = Snippet
     template_name = 'explore_pastes.html'
     context_object_name = 'pastes'
-    paginate_by = 4
+    paginate_by = 8
+    ordering = '-modified_at'
 
     def get_queryset(self) -> QuerySet[Any]:
         return super().get_queryset().filter(private=False)
