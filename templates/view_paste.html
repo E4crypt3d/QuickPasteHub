@@ -59,7 +59,7 @@ View Paste
                         class="btn bg-[#6b6b6b38] join-item hover:bg-[#6b6b6b59]">Edit</a>
                     {% endif %}
                     <div id="copy{{paste.id}}" class="tooltip tooltip-bottom" data-tip="copy">
-                        <button onclick="copyText(`{{paste.id}}`,`{{paste.text}}`);"
+                        <button onclick="copyText();"
                             class="btn join-item bg-[#6b6b6b38] hover:bg-[#6b6b6b59] cursor-copy">
 
                             <svg viewBox="0 0 1024 1024" class="icon w-7" version="1.1"
@@ -96,7 +96,7 @@ View Paste
                         </button>
                     </div>
                     <div class="tooltip tooltip-bottom" data-tip="share">
-                        <button onclick="shareWA(`{{paste.token}}`)"
+                        <button onclick="shareWA()"
                             class="btn join-item bg-[#6b6b6b38] hover:bg-[#6b6b6b59] cursor-pointer">
                             <svg class="w-7 fill-base-content" version="1.1" id="Layer_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -123,21 +123,29 @@ View Paste
 
 </div>
 <script>
-    const shareWA = (text) => {
-        var message = `QuickPasteHub Paste:\n\nURL: https://www.example.com/${text}\nToken: ${text}`
-
-        // Encode text for URL
-        var encodedText = encodeURIComponent(message);
-
-        // Check if the user is on a mobile device
+    const pasteTk = `{{paste.token}}`
+    const shareWA = () => {
+        const cUrl = window.location.href; var message = `QuickPasteHub Paste:\n\nURL:\n${cUrl}\nToken:\n${pasteTk}`; var encodedText = encodeURIComponent(message);
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            // WhatsApp mobile app
             window.location.href = "whatsapp://send?text=" + encodedText;
         } else {
-            // WhatsApp Web or fallback for unsupported devices
             window.open("https://web.whatsapp.com/send?text=" + encodedText);
         }
     };
+    const copyText = () => {
+        const pasteText = `{{paste.text}}`
+        let id = 'copy' + `{{paste.id}}`
+        navigator.clipboard.writeText(pasteText).then(() => {
+            let copyText = document.getElementById(id);
+            copyText.setAttribute('data-tip', 'copied');
+            setTimeout(() => {
+                copyText.setAttribute('data-tip', 'copy')
+            }, 3000
+            );
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 </script>
 
 {% endblock content %}

@@ -87,20 +87,6 @@
                     href="https://github.com/e4crypt3d">E4CRYPT3D</a></p>
         </aside>
     </footer>
-    <script>
-        const copyText = (id, text) => {
-            navigator.clipboard.writeText(text).then(() => {
-                let copyText = document.getElementById(`copy${id}`);
-                copyText.setAttribute('data-tip', 'copied');
-                setTimeout(() => {
-                    copyText.setAttribute('data-tip', 'copy')
-                }, 3000
-                );
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
-    </script>
     <script src="{% static 'js/theme.js' %}"></script>
     <script src="{% static 'js/jquery3.7.1.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"

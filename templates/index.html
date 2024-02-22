@@ -84,14 +84,13 @@ Home
                         </div>
                     </div>
                     <div class="text-wrap">
+                        <span class="hidden" id="text{{paste.id}}">{{paste.text}}</span>
                         {{ paste.text|highlight:paste.language|truncatewords_html:50|safe }}
                     </div>
                     <div class="card-actions justify-end mt-auto my-2">
                         <div class="join">
-
-
                             <div id="copy{{paste.id}}" class="tooltip tooltip-bottom" data-tip="copy">
-                                <button onclick="copyText(`{{paste.id}}`,`{{paste.text}}`);"
+                                <button onclick="copyText(`{{paste.id}}`);"
                                     class="btn join-item bg-[#6b6b6b38] hover:bg-[#6b6b6b59] cursor-copy">
                                     <svg viewBox="0 0 1024 1024" class="icon w-8" version="1.1"
                                         xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -258,5 +257,22 @@ Home
 
 </div>
 
-
+<script>
+    const copyText = (id) => {
+        console.log(id)
+        let copyId = `copy${id}`;
+        const textId = `text${id}`;
+        const pasteText = document.getElementById(textId).textContent;
+        navigator.clipboard.writeText(pasteText).then(() => {
+            let copyText = document.getElementById(copyId);
+            copyText.setAttribute('data-tip', 'copied');
+            setTimeout(() => {
+                copyText.setAttribute('data-tip', 'copy');
+            }, 3000
+            );
+        }).catch((err) => {
+            console.log(err);
+        })
+    };
+</script>
 {% endblock content %}

@@ -14,9 +14,8 @@ class Command(BaseCommand):
 
             # Filter Snippet objects modified before 30 days ago
             pastes = Snippet.objects.filter(modified_at__lt=time)
-
             # Check if any pastes were found
-            if pastes.exists():
+            if pastes.exists() and pastes.count() > 10:
                 # Delete the pastes
                 pastes.delete()
                 self.stdout.write(
