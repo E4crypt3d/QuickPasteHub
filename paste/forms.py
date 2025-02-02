@@ -9,13 +9,28 @@ class SnippetForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['author'].widget.attrs['class'] = 'input input-bordered input-sm w-full max-w-xs'
-        self.fields['author'].widget.attrs['Placeholder'] = 'Author'
-        self.fields['text'].widget.attrs['class'] = 'textarea textarea-bordered textarea-sm w-full'
-        self.fields['text'].widget.attrs['Placeholder'] = 'Write your code or text'
-        # self.fields['language'].widget.attrs['class'] = 'select select-bordered w-full max-w-xs'
-        self.fields['private'].widget.attrs['class'] = 'checkbox'
-        self.fields['editable'].widget.attrs['class'] = 'checkbox'
+        
+        # Author Field
+        self.fields['author'].widget.attrs.update({
+            'class': 'input input-bordered input-sm w-full max-w-xs bg-[#0d1117] text-[#c9d1d9] placeholder-[#8b949e] border border-[#30363d] rounded-md',
+            'placeholder': 'Author',
+        })
+        
+        # Text Field
+        self.fields['text'].widget.attrs.update({
+            'class': 'textarea textarea-bordered textarea-sm w-full p-2 bg-[#0d1117] text-[#c9d1d9] placeholder-[#8b949e] border border-[#30363d] rounded-md font-mono',
+            'placeholder': 'Write your code or text',
+        })
+        
+        # Private Checkbox
+        self.fields['private'].widget.attrs.update({
+            'class': 'checkbox checkbox-sm rounded-md border border-[#30363d] bg-[#0d1117] text-[#238636]',
+        })
+        
+        # Editable Checkbox
+        self.fields['editable'].widget.attrs.update({
+            'class': 'checkbox checkbox-sm rounded-md border border-[#30363d] bg-[#0d1117] text-[#a371f7]',
+        })
 
 
 class SearchForm(forms.Form):

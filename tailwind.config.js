@@ -2,7 +2,7 @@
 module.exports = {
 	content: ["./templates/*.html", "./templates/partials/*.html"],
 	daisyui: {
-		themes: ["retro", "night"],
+		themes: ["dark"],
 	},
 	plugins: [require("daisyui")],
 };

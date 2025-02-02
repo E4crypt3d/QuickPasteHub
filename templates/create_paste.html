@@ -46,16 +46,30 @@ Create Paste
                         {% endfor %}
                     </ul>
                 </label>
-                <label>
+                <label class="block">
+                    <!-- Label -->
                     <div class="label">
-                        <span class="label-text">{{form.text.label}}</span>
+                        <span class="label-text text-[#c9d1d9] text-sm font-medium">{{ form.text.label }}</span>
                     </div>
-                    {{form.text}}
-                    <ul class="mx-8">
+                    <!-- Textarea -->
+                    <div class="mt-1">
+                        {{ form.text }}
+                    </div>
+                    <!-- Error Messages -->
+                    {% if form.text.errors %}
+                    <ul class="mt-2 space-y-1">
                         {% for error in form.text.errors %}
-                        <li class="label-text-alt text-error list-disc">{{error}}</li>
+                        <li class="text-[#f85149] text-xs font-medium flex items-center gap-1">
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 11a1 1 0 0 1-1-1V6a1 1 0 0 1 2 0v4a1 1 0 0 1-1 1zm0 2a1 1 0 1 1 0-2 1 1 0 0 1 0 2z">
+                                </path>
+                            </svg>
+                            {{ error }}
+                        </li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </label>
                 <style>
                     .selectize-control.single .selectize-input.input-active,
@@ -108,10 +122,18 @@ Create Paste
                         {% endfor %}
                     </ul>
                 </div>
-                <div class="join">
-                    <button class="btn join-item btn-active my-10 ml-1 mr-1" type="submit">Save</button>
-                    <a href="{{ request.META.HTTP_REFERER }}" class="btn join-item btn-active my-10"
-                        type="submit">Back</a>
+                <div class="join flex justify-center mt-6">
+                    <!-- Save Button -->
+                    <button
+                        class="btn join-item bg-[#238636] text-[#ffffff] border border-[#1f6f2e] hover:bg-[#1f6f2e] transition-colors duration-200 py-2 px-4 rounded-md text-sm font-medium"
+                        type="submit">
+                        Save
+                    </button>
+                    <!-- Back Button -->
+                    <a href="{{ request.META.HTTP_REFERER }}"
+                        class="btn join-item bg-[#6b6b6b38] text-[#c9d1d9] border border-[#30363d] hover:bg-[#6b6b6b59] transition-colors duration-200 py-2 px-4 rounded-md text-sm font-medium ml-2">
+                        Back
+                    </a>
                 </div>
             </form>
     </div>
